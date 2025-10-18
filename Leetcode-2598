@@ -1,0 +1,30 @@
+class Solution {
+public:
+    int findSmallestInteger(vector<int>& nums, int value) {
+        map<int,int> m;
+
+        for(int i = 0; i < nums.size(); i++){
+                   int rem = ((nums[i] % value) + value) % value;
+            m[rem]++;
+        }
+          for(auto i : m){
+            cout << i.first << " " << i.second << endl;
+        }
+        int i = 0;
+        while(!m.empty()){
+            int rem = i % value;
+            if(m.find(rem) != m.end()){
+                m[rem]--;
+                if(m[rem] <= 0){
+                    m.erase(rem);
+                }
+            }else{
+                
+                return i;
+            }
+            i++;
+        }
+   
+        return i;
+    }
+};
